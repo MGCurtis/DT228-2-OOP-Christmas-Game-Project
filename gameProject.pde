@@ -1,14 +1,13 @@
 int screen = 0;
-
+PImage bGImg;
 
 void setup()
 {
   size(650, 650);
-  PImage bGImg;
   bGImg = loadImage("gameBG.png");
-  background(bGImg);
+  
   grid = new Grid (10, 10);
-  grid.render();
+
   /*for(int i = 1; i < 10; i++)
   {
     int hGap = width / 10;
@@ -20,3 +19,17 @@ void setup()
 }
 
 Grid grid;
+
+void draw()
+{
+  background(bGImg);
+  grid.render();
+  mouseCheck();
+}
+
+void mouseCheck()
+{
+  int x = (int)(mouseX / grid.cellWidth);
+  int y = (int)(mouseY / grid.cellHeight);
+  grid.highlight(x, y);
+}

@@ -13,6 +13,13 @@ class Grid
       cells[row][col] = value;
     }
   }
+  
+  void highlight(int row, int col)
+  {
+    stroke(200, 200, 0);
+    noFill();
+    rect(row * cellWidth, col * cellHeight, cellWidth, cellHeight);
+  }
     
   Grid(int rows, int cols)
   {
