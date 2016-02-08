@@ -1,10 +1,10 @@
 int screen = 0;
-PImage bGImg;
+PImage bGImg, jeepImg, tankImg;
 
 void setup()
 {
   size(650, 650);
-  bGImg = loadImage("gameBG.png");
+  bGImg = loadImage("gameBG2.png");
   
   grid = new Grid (10, 10);
 

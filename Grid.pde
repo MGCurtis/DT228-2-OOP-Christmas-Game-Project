@@ -42,6 +42,7 @@ class Grid
         stroke(127);
         noFill();
         rect(x, y, cellWidth, cellHeight);
+        //Toggle rect
       }
     }
   }
