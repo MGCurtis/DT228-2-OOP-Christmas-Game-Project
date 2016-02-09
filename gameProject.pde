@@ -1,6 +1,10 @@
 int screen = 0;
 PImage bGImg, jeepImg, tankImg;
 
+Grid grid;
+
+ArrayList<Turret> Towers = new ArrayList<Turret>;
+
 void setup()
 {
   size(650, 650);
@@ -18,8 +22,6 @@ void setup()
   }*/
 }
 
-Grid grid;
-
 void draw()
 {
   background(bGImg);
@@ -32,4 +34,5 @@ void mouseCheck()
   int x = (int)(mouseX / grid.cellWidth);
   int y = (int)(mouseY / grid.cellHeight);
   grid.highlight(x, y);
+  
 }

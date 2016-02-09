@@ -4,14 +4,18 @@ class Grid
   int cols;
   int cellWidth;
   int cellHeight;
+  boolean
   boolean[][] cells;
   
-  void set(int row, int col, boolean value)
+  void cellSet(int row, int col, boolean value)
   {
-    if (row >= 0 && row < rows && col >= 0 && col < cols)
-    {
-      cells[row][col] = value;
-    }
+    cells[row][col] = value;
+  }
+  
+  boolean cellCheck(int row, int col)
+  {
+    boolean status = cells[row][col];
+    return status;
   }
   
   void highlight(int row, int col)
@@ -19,6 +23,11 @@ class Grid
     stroke(200, 200, 0);
     noFill();
     rect(row * cellWidth, col * cellHeight, cellWidth, cellHeight);
+  }
+  
+  boolean emptyCell()
+  {
+    if
   }
     
   Grid(int rows, int cols)

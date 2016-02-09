@@ -1,4 +1,4 @@
-interface Enemy
+/*interface Enemy
 {
   int hitPoints;
   float speed;
