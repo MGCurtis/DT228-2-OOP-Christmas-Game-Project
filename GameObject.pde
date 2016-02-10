@@ -7,7 +7,7 @@ abstract class GameObject
 
   
   
-  /*GameObject()
+  GameObject()
   {
     this(width * 0.5f, height * 0.5f, 10);
   }
@@ -17,5 +17,5 @@ abstract class GameObject
     pos = new PVector(x, y);
     this.w = w;
     this.theta = 0.0f;
-  }*/
+  }
 }

@@ -54,8 +54,10 @@ void setup()
 void draw()
 {
   background(bGImg);
-  textSize(12);
-  text("Lives: " + lives, width*0, height*0.02f);
+  textSize(15);
+  text("Lives: " + lives, 0, height*0.02f);
+  text("$: " + money, 0, height*0.05f);
+  
   //grid.render();
   mouseCheck();
   spawnPoint = getCellCentre(path[0]);
@@ -195,13 +197,14 @@ void mouseCheck()
 
 void mouseClicked()
 {
-  if (buildable && !isPath)
+  if (buildable && !isPath && money >= 50)
   {
     Turret tower = new Turret(cellX, cellY);
     gameObjects.add(tower);
     towers.add(tower);
     grid.cellSet(cellX, cellY, true);
     println(cellX + " " + cellY);
+    money -= 50;
   }
 }
 
@@ -249,5 +252,22 @@ PVector getCellCentre (PVector v)
   int cY = ((int)v.y * grid.cellHeight) + (grid.cellHeight/2);
   PVector cellCenter = new PVector (cX, cY);
   return cellCenter;
+}
+
+void collision();
+{
+  for (int i = gameObjects.size() - 1; i >= 0; i --)
+  {
+    GameObject go = gameObjects.get(i);
+    if(go instanceof Enemy)
+    {
+      for (int j = gameObjects.size() - 1; j >= ; j --)
+      {
+        GameObject other = gameObjects.get(j);
+        
+        if (other instanceof Bullet
+      }
+    }
+  }
 }
 
