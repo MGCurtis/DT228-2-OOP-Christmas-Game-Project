@@ -13,6 +13,7 @@ class Turret extends GameObject
   
   void render(int w, int h)
   {
+    imageMode(CORNER);
     image(towerImg, x * w, y * h, w, h);
     stroke(255,0,0);
     ellipse((x * w) + (w/2), (y * h) + (h/2), range, range);

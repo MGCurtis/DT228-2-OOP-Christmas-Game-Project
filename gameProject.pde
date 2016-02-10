@@ -16,7 +16,7 @@ ArrayList<Turret> towers = new ArrayList<Turret>();
 void setup()
 {
   size(650, 650);
-  bGImg = loadImage("gameBG2.png");
+  bGImg = loadImage("gameBG.png");
   
   grid = new Grid (10, 10);
   
@@ -43,23 +43,7 @@ void setup()
   for(int i = 0 ; i < path.length - 1 ; i++)
   {
     setPath(path[i], path[i+1]);
-  }
-  
-  /*grid.cellSet(0,1,true);
-  grid.cellSet(8,1,true);
-  grid.cellSet(8,4,true);
-  grid.cellSet(0,4,true);
-  grid.cellSet(0,8,true);
-  grid.cellSet(2,8,true);
-  grid.cellSet(2,6,true);
-  grid.cellSet(4,6,true);
-  grid.cellSet(4,8,true);
-  grid.cellSet(6,8,true);
-  grid.cellSet(6,6,true);
-  grid.cellSet(8,6,true);
-  grid.cellSet(8,8,true);
-  grid.cellSet(9,8,true)*/
-;
+  };
 
   //for(i = 0 ; i
 }
@@ -74,9 +58,14 @@ void draw()
   {
     towers.get(i).render(grid.cellWidth, grid.cellHeight);
   }
+  
+  if(frameCount % 60 == 0)
+  {
+    
+  }
 }
 
-int cellX, cellY;
+int cellX, cellY, pCellX, pCellY;
 
 void mouseCheck()
 {
