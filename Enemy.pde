@@ -20,7 +20,6 @@ class Enemy extends GameObject
   Enemy(PVector v, int r)
   {
     pos = v;
-    forward = new PVector(0, -1);
     speed = 1.0f;
     rng = (int)random(0,10); //picks a random number between
                              //0 and 10 at construction
@@ -80,4 +79,16 @@ class Enemy extends GameObject
     theta += HALF_PI;
   }
   
+  void hit()
+  {
+    for (int i = gameObjects.size() - 1; i >= 0; i --)
+    {
+      GameObject go = gameObjects.get(i);
+      if (go instanceof Bullet)
+      {
+        float dist = PVector.dist(go.pos, pos);
+        //if(dist < 
+      }
+    }
+  }
 }

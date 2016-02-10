@@ -1,4 +1,3 @@
-
 int lives, money; //vars for lives and money
 
 PImage bGImg; //image for level background
@@ -77,8 +76,9 @@ void draw()
   for (int i = 0; i < towers.size (); i++)
   {
     towers.get(i).render(grid.cellWidth, grid.cellHeight);
-    println(towers.get(i).lookForEnemy());
     
+    towers.get(i).shoot(towers.get(i).lookForEnemy());
+    //println(towers.get(i).pos);
   }
   
   //for loop to perform actions on all enemies in the enemy array
@@ -181,6 +181,8 @@ void draw()
       gameObjects.remove(enemies.get(i));
       enemies.remove(i);
     }
+    
+    //checkCollision();
   }
 
   //after every 90 frames, 1.5 secs, add an enemy and add it to the arrays
@@ -308,9 +310,17 @@ void checkCollision()
           gameObjects.remove(j);
           money += 5;
         }
+        if(other instanceof Turret)
+        {
+          float distance = PVector.dist(go.pos, other.pos);
+          if (distance < float(other.range/2))
+          {
+            
+            println("Dist: " + PVector.dist(go.pos, other.pos));
+          }
+        }
         
       }
     }
   }
 }
-

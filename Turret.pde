@@ -2,7 +2,7 @@ class Turret extends GameObject
 {
   int x, y;
   PImage towerImg= loadImage("turret1.png");
-  int range; //range of tower, used to render a circle too
+  int delay;
   
   Turret(int x, int y)
   {
@@ -18,6 +18,7 @@ class Turret extends GameObject
     //for the enemy sprites
     imageMode(CORNER);
     image(towerImg, x * w, y * h, w, h);
+    super.pos = new PVector((x * w) + (w/2), (y * h) + (h/2));
     stroke(255,0,0);
     //ellipse for reference of range of towers
     ellipse((x * w) + (w/2), (y * h) + (h/2), range, range);
@@ -31,43 +32,45 @@ class Turret extends GameObject
       GameObject go = gameObjects.get(i);
       if (go instanceof Enemy)
       {
-
         float distance = PVector.dist(go.pos, pos);
         if (distance < range/2)
         {
           enemy = go;
+          //println(distance);
         }
       }
     }
     return enemy;
   }
   
-  /*if (enemy == null)
+  void shoot(GameObject enemy)
   {
-    enemy = searchForEnemy;
+    if (enemy == null)
+    {
+      enemy = lookForEnemy();
+    }
+    else
+    {
+      PVector toEnemy = PVector.sub(pos, enemy.pos);
+      float dist = PVector.dist(enemy.pos, pos);
+      theta = atan2(toEnemy.y, toEnemy.x) - HALF_PI;
+      forward.x = sin(theta);
+      forward.y = -cos(theta);
+      delay ++;
+      if (delay > 30)
+      {
+        Bullet bullet = new Bullet(pos.x, pos.y, 2);
+        bullet.pos.add(PVector.mult(forward, 15.0f));
+        bullet.forward = forward;
+        bullet.theta = theta;
+        gameObjects.add(bullet);
+        delay = 0;
+        println("Shoot");
+      }
+      if (dist < range || ((Enemy)enemy).hitPoints <=0)
+      {
+        enemy = null;
+      }
+    }
   }
-  else
-  {
-    PVector toEnemy = PVector.sub(pos, enemy.pos);
-    float dist = PVector.dist(enemy.pos, pos);
-    theta = atan2(toEnemy.y, toEnemy.x) - HALF_PI;
-    forward.x = sin(theta);
-    forward.y = -cos(theta);
-
-    if (ellapsed > 30)
-    {
-      Bullet pro = new Bullet(pos.x, pos.y, 1, 2, 5, range,c);
-
-      bullet.pos.add(PVector.mult(forward, 15.0f));
-      bullet.forward = forward;
-      bullet.theta = theta;
-      gameObjects.add(bullet);
-      ellapsed = 0;
-    }
-
-    if (dist < range || ((Creep)creep).life <=0)
-    {
-      creep = null;
-    }
-  }*/
 }

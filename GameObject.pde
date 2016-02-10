@@ -5,7 +5,10 @@ abstract class GameObject
   PVector pos;
   float theta = 0.0f;
   float w;
-  PVector forward;
+  PVector forward = new PVector(0, -1);
+  int range; //range of tower, used to render a circle too
+
+  
 
   
   
