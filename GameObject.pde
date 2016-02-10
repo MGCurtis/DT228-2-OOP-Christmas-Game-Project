@@ -3,6 +3,8 @@ abstract class GameObject
   PVector pos;
   float theta = 0.0f;
   float w;
+  PVector forward;
+
   
   
   /*GameObject()
