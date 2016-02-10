@@ -14,7 +14,7 @@ class Enemy extends GameObject
   {
     pos = v;
     forward = new PVector(0, -1);
-    speed = 2.0f;
+    speed = 1.0f;
     rng = (int)random(0,10);
     radius = r;
     nextWP = 1;
@@ -27,13 +27,15 @@ class Enemy extends GameObject
     translate(pos.x, pos.y);
     rotate(theta);
     imageMode(CENTER);
-    if(rng <= 7)
+    if(rng < 7)
     {
       image(sprites[0], 0, 0, w, h);
+      hitPoints = 10;
     }
     else
     {
       image(sprites[1], 0, 0, w, h);
+      hitPoints = 20;
     }
     noStroke();
     ellipse(0, 0, radius, radius);

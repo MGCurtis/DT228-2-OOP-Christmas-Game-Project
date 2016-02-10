@@ -45,15 +45,20 @@ void setup()
   {
     setPath(path[i], path[i+1]);
   };
+  
+  grid.cellSet(0,0,true);
 
-  spawnPoint = getCellCentre(path[0]);
+  
 }
 
 void draw()
 {
   background(bGImg);
-  grid.render();
+  textSize(12);
+  text("Lives: " + lives, width*0, height*0.02f);
+  //grid.render();
   mouseCheck();
+  spawnPoint = getCellCentre(path[0]);
 
   for (int i = 0; i < towers.size (); i++)
   {
@@ -64,12 +69,103 @@ void draw()
   {
     enemies.get(i).render(grid.cellWidth, grid.cellHeight);
     enemies.get(i).update();
+    println(getCellCentre(path[1]));
+    
+    if(enemies.get(i).pos.x == getCellCentre(path[1]).x && 
+    enemies.get(i).nextWP == 1)
+    {
+      enemies.get(i).turnRight();
+      enemies.get(i).nextWP ++;
+    }
+    
+    if(enemies.get(i).pos.y == getCellCentre(path[2]).y && 
+    enemies.get(i).nextWP == 2)
+    {
+      enemies.get(i).turnRight();
+      enemies.get(i).nextWP ++;
+    }
+    
+    if(enemies.get(i).pos.x == getCellCentre(path[3]).x && 
+    enemies.get(i).nextWP == 3)
+    {
+      enemies.get(i).turnLeft();
+      enemies.get(i).nextWP ++;
+    }
+    
+    if(enemies.get(i).pos.y == getCellCentre(path[4]).y &&
+    enemies.get(i).nextWP == 4)
+    {
+      enemies.get(i).turnLeft();
+      enemies.get(i).nextWP ++;
+    }
+    
+    if(enemies.get(i).pos.x == getCellCentre(path[5]).x &&
+    enemies.get(i).nextWP == 5)
+    {
+      enemies.get(i).turnLeft();
+      enemies.get(i).nextWP ++;
+    }
+    
+    if(enemies.get(i).pos.y == getCellCentre(path[6]).y &&
+    enemies.get(i).nextWP == 6)
+    {
+      enemies.get(i).turnRight();
+      enemies.get(i).nextWP ++;
+    }
+    
+    if(enemies.get(i).pos.x == getCellCentre(path[7]).x &&
+    enemies.get(i).nextWP == 7)
+    {
+      enemies.get(i).turnRight();
+      enemies.get(i).nextWP ++;
+    }
+    
+    if(enemies.get(i).pos.y == getCellCentre(path[8]).y &&
+    enemies.get(i).nextWP == 8)
+    {
+      enemies.get(i).turnLeft();
+      enemies.get(i).nextWP ++;
+    }
+    
+    if(enemies.get(i).pos.x == getCellCentre(path[9]).x &&
+    enemies.get(i).nextWP == 9)
+    {
+      enemies.get(i).turnLeft();
+      enemies.get(i).nextWP ++;
+    }
+    
+    if(enemies.get(i).pos.y == getCellCentre(path[10]).y &&
+    enemies.get(i).nextWP == 10)
+    {
+      enemies.get(i).turnRight();
+      enemies.get(i).nextWP ++;
+    }
+    
+    if(enemies.get(i).pos.x == getCellCentre(path[11]).x &&
+    enemies.get(i).nextWP == 11)
+    {
+      enemies.get(i).turnRight();
+      enemies.get(i).nextWP ++;
+    }
+    
+    if(enemies.get(i).pos.y == getCellCentre(path[12]).y &&
+    enemies.get(i).nextWP == 12)
+    {
+      enemies.get(i).turnLeft();
+      enemies.get(i).nextWP ++;
+    }
+    
+    if(enemies.get(i).pos.x == getCellCentre(path[13]).x &&
+    enemies.get(i).nextWP == 13)
+    {
+      lives--;
+      enemies.remove(i);
+    }
   }
 
-  if (frameCount % 60 == 0)
+  if (frameCount % 90 == 0)
   {
     Enemy enemy = new Enemy(spawnPoint, 50);
-    println(spawnPoint);
     enemies.add(enemy);
     gameObjects.add(enemy);
   }
