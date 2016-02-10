@@ -77,6 +77,8 @@ void draw()
   for (int i = 0; i < towers.size (); i++)
   {
     towers.get(i).render(grid.cellWidth, grid.cellHeight);
+    println(towers.get(i).lookForEnemy());
+    
   }
   
   //for loop to perform actions on all enemies in the enemy array
@@ -84,7 +86,6 @@ void draw()
   {
     enemies.get(i).render(grid.cellWidth, grid.cellHeight);
     enemies.get(i).update();
-    println(getCellCentre(path[1]));
     
     //all of these are for waypoint actions, telling enemies
     //which direction to turn at what points, from the path array
@@ -200,8 +201,10 @@ void mouseCheck()
   cellY = (int)(mouseY / grid.cellHeight);
   color c;
   
+  //checks to see if cell is buildable
   buildable = grid.cellCheck(cellX, cellY);
   
+  //if buildable highlight in yellow, otherwise highlight in red
   if(buildable)
   {
     c = #AAAA00;
@@ -216,22 +219,31 @@ void mouseCheck()
 
 void mouseClicked()
 {
+  //if cell is buildable and the user has 50 or more money
+  //create a tower in the cell the user has their mouse over
+  //add it to the gameObjects and towers arraylists
+  //and subtract 50 from user's money
   if (buildable && !isPath && money >= 50)
   {
     Turret tower = new Turret(cellX, cellY);
     gameObjects.add(tower);
     towers.add(tower);
     grid.cellSet(cellX, cellY, true);
-    println(cellX + " " + cellY);
     money -= 50;
   }
 }
 
+//method to set all cells between two points to not be buildable
 void setPath(PVector v1, PVector v2)
 {
   int difX = int(v1.x - v2.x);
   int difY = int(v1.y - v2.y);
 
+  //if the PVectors have different x values move along the x-axis
+  //depending on if the difference is positive or negative
+  //and set's all cells between them to true
+  //(which in my Grid class I set up to mean there is something
+  //there obstructing building)
   if (difX !=0)
   {
     if (difX < 0)
@@ -247,7 +259,10 @@ void setPath(PVector v1, PVector v2)
         grid.cellSet((int)v1.x - i, (int)v1.y, true); //path goes left
       }
     }
-  } else
+  }
+  //if there is no difference between the x values
+  //do the same thing but along the y-axis
+  else
   {
     if (difY < 0)
     {
@@ -265,6 +280,8 @@ void setPath(PVector v1, PVector v2)
   }
 }
 
+//method to get the centre point of a cell
+//takes in vector with the array location of the cell
 PVector getCellCentre (PVector v)
 { 
   int cX = ((int)v.x * grid.cellWidth) + (grid.cellWidth/2);
@@ -273,7 +290,8 @@ PVector getCellCentre (PVector v)
   return cellCenter;
 }
 
-void collision()
+//method to handle collision between enemies and bullets
+void checkCollision()
 {
   for (int i = gameObjects.size() - 1; i >= 0; i --)
   {
@@ -290,6 +308,7 @@ void collision()
           gameObjects.remove(j);
           money += 5;
         }
+        
       }
     }
   }

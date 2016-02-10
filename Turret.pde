@@ -2,7 +2,7 @@ class Turret extends GameObject
 {
   int x, y;
   PImage towerImg= loadImage("turret1.png");
-  int range;
+  int range; //range of tower, used to render a circle too
   
   Turret(int x, int y)
   {
@@ -13,13 +13,17 @@ class Turret extends GameObject
   
   void render(int w, int h)
   {
+    //sets image mode back to corner so that it doesn't
+    //create tower images from the centre like I was using
+    //for the enemy sprites
     imageMode(CORNER);
     image(towerImg, x * w, y * h, w, h);
     stroke(255,0,0);
+    //ellipse for reference of range of towers
     ellipse((x * w) + (w/2), (y * h) + (h/2), range, range);
   }
   
-  GameObject enemySearch()
+  GameObject lookForEnemy()
   {
     GameObject enemy = null;
     for (int i = gameObjects.size() - 1; i >= 0; i --)
@@ -38,7 +42,7 @@ class Turret extends GameObject
     return enemy;
   }
   
-  if (enemy == null)
+  /*if (enemy == null)
   {
     enemy = searchForEnemy;
   }
@@ -65,5 +69,5 @@ class Turret extends GameObject
     {
       creep = null;
     }
-  }
+  }*/
 }

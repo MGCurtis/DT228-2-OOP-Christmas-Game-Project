@@ -1,3 +1,5 @@
+//Abstract class extended by all game objects
+//with common fields and methods
 abstract class GameObject
 {
   PVector pos;
