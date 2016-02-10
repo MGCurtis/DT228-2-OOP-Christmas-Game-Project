@@ -42,16 +42,14 @@ void mouseCheck()
   buildable = grid.cellCheck(cellX, cellY);
 }
 
-int towerX, towerY;
 
 void mouseClicked()
 {
-  towerX = cellX; 
-  towerY = cellY;
   if(buildable)
   {
-    Turret tower = new Turret(towerX, towerY);
+    Turret tower = new Turret(cellX, cellY);
     gameObjects.add(tower);
     towers.add(tower);
+    grid.cellSet(cellX, cellY, true);
   }
 }
