@@ -177,9 +177,19 @@ void mouseCheck()
 {
   cellX = (int)(mouseX / grid.cellWidth);
   cellY = (int)(mouseY / grid.cellHeight);
-
-  grid.highlight(cellX, cellY);
+  color c;
+  
   buildable = grid.cellCheck(cellX, cellY);
+  
+  if(buildable)
+  {
+    c = #AAAA00;
+  }
+  else
+  {
+    c = #FF0000;
+  }
+  grid.highlight(cellX, cellY, c);
 }
 
 

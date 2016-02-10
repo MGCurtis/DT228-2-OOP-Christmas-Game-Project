@@ -18,9 +18,9 @@ class Grid
     return status;
   }
   
-  void highlight(int row, int col)
+  void highlight(int row, int col, color c)
   {
-    stroke(200, 200, 0);
+    stroke(c);
     noFill();
     rect(row * cellWidth, col * cellHeight, cellWidth, cellHeight);
   }
