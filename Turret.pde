@@ -2,7 +2,7 @@ class Turret extends GameObject
 {
   int x, y;
   PImage towerImg= loadImage("turret1.png");
-  float range;
+  int range;
   
   Turret(int x, int y)
   {
