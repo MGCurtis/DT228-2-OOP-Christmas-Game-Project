@@ -30,7 +30,7 @@ void setup()
 
   //initialize lives and money
   lives = 20;
-  money = 150;
+  money = 50;
 
   //initialize path array with all points (in cell form) where an enemy
   //will turn.
