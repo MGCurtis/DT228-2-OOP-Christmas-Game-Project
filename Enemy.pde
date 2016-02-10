@@ -27,7 +27,7 @@ class Enemy extends GameObject
     translate(pos.x, pos.y);
     rotate(theta);
     imageMode(CENTER);
-    if(rng < 7)
+    if(rng <= 7)
     {
       image(sprites[0], 0, 0, w, h);
       hitPoints = 10;

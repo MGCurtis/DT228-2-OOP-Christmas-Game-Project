@@ -1,29 +1,35 @@
-int screen = 0;
-int lives, money;
 
-PImage bGImg;
+int lives, money; //vars for lives and money
 
-boolean buildable, isPath;
+PImage bGImg; //image for level background
 
-PVector[] path;
-PVector spawnPoint;
+boolean buildable, isPath; //boolean for whether you can build on a cell
 
-Grid grid;
+PVector[] path; //array for points on the enemy path
+PVector spawnPoint; //vector location to spawn enemies
 
+Grid grid; //constructor for grid
+
+//Various arraylists to store assorted game objects
 ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 ArrayList<Turret> towers = new ArrayList<Turret>();
 
+
+
 void setup()
 {
   size(650, 650);
-  bGImg = loadImage("gameBG.png");
+  bGImg = loadImage("gameBG.png"); //load in background image
 
-  grid = new Grid (10, 10);
+  grid = new Grid (10, 10); //initialize grid
 
+  //initialize lives and money
   lives = 20;
   money = 150;
 
+  //initialize path array with all points (in cell form) where an enemy
+  //will turn.
   path = new PVector[] {
     new PVector(0, 1), 
     new PVector(8, 1), 
@@ -40,12 +46,15 @@ void setup()
     new PVector(8, 8), 
     new PVector(9, 8),
   };
-
+  
+  //for loop to iterate through path array and set all cells
+  //to not be buildable
   for (int i = 0; i < path.length - 1; i++)
   {
     setPath(path[i], path[i+1]);
   };
   
+  //set top left cell to not be buildable, for displaying lives and money
   grid.cellSet(0,0,true);
 
   
@@ -53,7 +62,8 @@ void setup()
 
 void draw()
 {
-  background(bGImg);
+  background(bGImg); //set background
+  //set text size and display lives and money in top left of screen
   textSize(15);
   text("Lives: " + lives, 0, height*0.02f);
   text("$: " + money, 0, height*0.05f);
@@ -161,6 +171,7 @@ void draw()
     enemies.get(i).nextWP == 13)
     {
       lives--;
+      gameObjects.remove(enemies.get(i));
       enemies.remove(i);
     }
   }
@@ -254,18 +265,23 @@ PVector getCellCentre (PVector v)
   return cellCenter;
 }
 
-void collision();
+void collision()
 {
   for (int i = gameObjects.size() - 1; i >= 0; i --)
   {
     GameObject go = gameObjects.get(i);
     if(go instanceof Enemy)
     {
-      for (int j = gameObjects.size() - 1; j >= ; j --)
+      for (int j = gameObjects.size() - 1; j >= 0 ; j --)
       {
         GameObject other = gameObjects.get(j);
         
-        if (other instanceof Bullet
+        if (other instanceof Bullet)
+        {
+          ((Enemy)go).hitPoints -= 5;
+          gameObjects.remove(j);
+          money += 5;
+        }
       }
     }
   }
