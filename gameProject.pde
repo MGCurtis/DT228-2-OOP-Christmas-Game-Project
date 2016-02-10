@@ -1,3 +1,7 @@
+import ddf.minim.*;
+
+Minim minim;
+
 int lives, money; //vars for lives and money
 
 PImage bGImg; //image for level background
@@ -20,6 +24,7 @@ void setup()
 {
   size(650, 650);
   bGImg = loadImage("gameBG.png"); //load in background image
+  minim = new Minim(this);
 
   grid = new Grid (10, 10); //initialize grid
 
@@ -77,8 +82,8 @@ void draw()
   for (int i = 0; i < towers.size (); i++)
   {
     towers.get(i).render(grid.cellWidth, grid.cellHeight);
-    
-    towers.get(i).shoot(towers.get(i).lookForEnemy());
+    GameObject target = towers.get(i).lookForEnemy();
+    if(target != null) towers.get(i).shoot(target);
     //println(towers.get(i).pos);
   }
   

@@ -3,7 +3,9 @@ class Bullet extends GameObject
   int radius;
   float speed;
   float range;
-  int timer;
+  int timer; //after timer reaches certain number bullet dies
+  AudioPlayer audio; //used to play gunshot sound
+  
   
   Bullet(float x, float y, int r)
   {
@@ -12,6 +14,7 @@ class Bullet extends GameObject
     range = r;
     radius = 4;
     speed = 2.0f;
+    audio = minim.loadFile("Gunshot.wav"); //loads audio file
   }
   
   void render()
@@ -23,6 +26,8 @@ class Bullet extends GameObject
     rotate(theta);
     ellipse(0, 0, radius, radius);
     popMatrix();
+    audio.play(); //plays audio file on bullet appearing
+
   }
   
   void update()
@@ -32,6 +37,7 @@ class Bullet extends GameObject
     pos.add(PVector.mult(forward, speed));
     
     timer ++;
+    //after 90 frames (1.5 seconds) remove bullet.
     if(timer == 90)
     {
       gameObjects.remove(this);

@@ -96,6 +96,7 @@ class Enemy extends GameObject
   {
     if(hitPoints <= 0)
     {
+      gameObjects.remove(this); //remove from gameObjects array
       enemies.remove(this); //remove enemy from array
       if(type == 0)
       {

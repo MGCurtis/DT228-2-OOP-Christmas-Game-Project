@@ -28,6 +28,8 @@ class Turret extends GameObject
   GameObject lookForEnemy()
   {
     GameObject enemy = null; //stays null if no enemies in range
+    float minDist = Float.MAX_VALUE; //used for finding nearest
+                                     //enemy to turret
     //goes through gameObjects array, looks at all enemies
     //finds distance between each enemy and turret
     //if distance is less than the turret's range the enemy
@@ -37,11 +39,13 @@ class Turret extends GameObject
       GameObject go = gameObjects.get(i);
       if (go instanceof Enemy)
       {
+        //distance between turret and enemy
         float distance = PVector.dist(go.pos, pos);
-        if (distance < range/2)
+        //looks for closest enemy
+        if (distance < range/2 && distance < minDist)
         {
           enemy = go;
-          //println(distance);
+          minDist = distance;
         }
       }
     }
@@ -57,12 +61,14 @@ class Turret extends GameObject
     }
     else
     {
+      //used for rotating towards enemy
       PVector toEnemy = PVector.sub(pos, enemy.pos);
       float dist = PVector.dist(enemy.pos, pos);
       theta = atan2(toEnemy.y, toEnemy.x) - HALF_PI;
       forward.x = sin(theta);
       forward.y = -cos(theta);
       delay ++;
+      //delays the turret's firing by 30 frames, half a second
       if (delay > 30)
       {
         Bullet bullet = new Bullet(pos.x, pos.y, range);
@@ -71,8 +77,9 @@ class Turret extends GameObject
         bullet.theta = theta;
         gameObjects.add(bullet);
         delay = 0;
-        println("Shoot");
       }
+      //if enemy goes out of range or dies set 'enemy' to null
+      //this makes the turret search again
       if (dist < range || ((Enemy)enemy).hitPoints <=0)
       {
         enemy = null;
