@@ -2,7 +2,7 @@ class Bullet extends GameObject
 {
   int radius;
   float speed;
-  float range;
+  //float range;
   PVector origin;
   
   Bullet(float x, float y, int r)
@@ -10,7 +10,6 @@ class Bullet extends GameObject
     pos.x = x;
     pos.y = y;
     radius = r;
-    range = 2*r;
     speed = 1.5f;
   }
   

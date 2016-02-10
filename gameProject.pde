@@ -81,6 +81,12 @@ void draw()
     //println(towers.get(i).pos);
   }
   
+  for (int i = 0; i < gameObjects.size(); i++)
+ {
+   if(gameObjects.get(i) instanceof Bullet)
+   ((Bullet)gameObjects.get(i)).render();
+ } 
+  
   //for loop to perform actions on all enemies in the enemy array
   for (int i = 0; i < enemies.size (); i++)
   {

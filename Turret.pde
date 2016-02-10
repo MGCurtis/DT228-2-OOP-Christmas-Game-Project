@@ -24,9 +24,14 @@ class Turret extends GameObject
     ellipse((x * w) + (w/2), (y * h) + (h/2), range, range);
   }
   
+  //method to find enemies that are in range of turret
   GameObject lookForEnemy()
   {
-    GameObject enemy = null;
+    GameObject enemy = null; //stays null if no enemies in range
+    //goes through gameObjects array, looks at all enemies
+    //finds distance between each enemy and turret
+    //if distance is less than the turret's range the enemy
+    //is stored in the 'enemy' variable declared above
     for (int i = gameObjects.size() - 1; i >= 0; i --)
     {
       GameObject go = gameObjects.get(i);
@@ -43,6 +48,7 @@ class Turret extends GameObject
     return enemy;
   }
   
+  //method to shoot bullets, takes in enemy found in above method
   void shoot(GameObject enemy)
   {
     if (enemy == null)
