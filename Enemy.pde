@@ -7,22 +7,23 @@ class Enemy extends GameObject
     loadImage("jeep.png"),
     loadImage("tank.png"),
   };
-  int rng; //random number integer for spawning different
-           //enemies randomly
+
   int radius; //radius of enemy, for use in collision
   int nextWP; //integer for determining which waypoint
               //the enemy will react to next.
               //Implemented because the enemies would turn
               //multiple times at the first waypoint
+  int type; //type of enemy being made
   
   //enemy constructor
   //assigns values for fields
-  Enemy(PVector v, int r)
+  Enemy(PVector v, int r, int life, int type)
   {
     pos = v;
     speed = 1.0f;
-    rng = (int)random(0,10); //picks a random number between
-                             //0 and 10 at construction
+    
+    this.hitPoints = life;
+    this.type = type;
     radius = r;
     nextWP = 1;
     theta += HALF_PI;
@@ -38,18 +39,8 @@ class Enemy extends GameObject
     rotate(theta);
     imageMode(CENTER); //creates image around centre point
                        //instead of from the corner
-    //if rng is 7 or below create a jeep and have 10 hitPoints
-    if(rng <= 7)
-    {
-      image(sprites[0], 0, 0, w, h);
-      hitPoints = 10;
-    }
-    //otherwise create a tank and have 20 hitPoints
-    else
-    {
-      image(sprites[1], 0, 0, w, h);
-      hitPoints = 20;
-    }
+    image(sprites[type], 0, 0, w, h);
+    
     //create a circle around the enemy for use in collision
     //the circle is not visible
     noStroke();
@@ -80,6 +71,7 @@ class Enemy extends GameObject
     theta += HALF_PI;
   }
   
+  //detect collision with bullet
   void hit()
   {
     for (int i = gameObjects.size() - 1; i >= 0; i --)
@@ -88,10 +80,30 @@ class Enemy extends GameObject
       if (go instanceof Bullet)
       {
         float dist = PVector.dist(go.pos, pos);
+        //if bullet is within radius remove it, take 5
+        //hitPoints from the enemy
         if(dist < radius)
         {
           gameObjects.remove(i);
+          hitPoints -= 5;
         }
+      }
+    }
+  }
+  
+  //method to remove enemies
+  void die()
+  {
+    if(hitPoints <= 0)
+    {
+      enemies.remove(this); //remove enemy from array
+      if(type == 0)
+      {
+        money += 10; 
+      }
+      else
+      {
+        money += 20;
       }
     }
   }

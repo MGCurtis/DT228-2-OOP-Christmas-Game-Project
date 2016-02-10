@@ -11,7 +11,7 @@ class Bullet extends GameObject
     pos.y = y;
     range = r;
     radius = 4;
-    speed = 1.5f;
+    speed = 2.0f;
   }
   
   void render()

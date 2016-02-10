@@ -97,6 +97,8 @@ void draw()
   {
     enemies.get(i).render(grid.cellWidth, grid.cellHeight);
     enemies.get(i).update();
+    enemies.get(i).hit();
+    enemies.get(i).die();
     
     //all of these are for waypoint actions, telling enemies
     //which direction to turn at what points, from the path array
@@ -199,7 +201,17 @@ void draw()
   //after every 90 frames, 1.5 secs, add an enemy and add it to the arrays
   if (frameCount % 90 == 0)
   {
-    Enemy enemy = new Enemy(spawnPoint, 50);
+    int rng = (int)random(0, 10); //random number integer for spawning different
+             //enemies randomly
+    Enemy enemy;
+    if(rng <= 7)
+    {
+      enemy = new Enemy(spawnPoint, 40, 10, 0);
+    }
+    else
+    {
+      enemy = new Enemy(spawnPoint, 40, 20, 1);
+    }
     enemies.add(enemy);
     gameObjects.add(enemy);
   }
