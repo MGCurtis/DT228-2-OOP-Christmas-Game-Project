@@ -1,8 +1,7 @@
 int screen = 0;
-PImage bGImg, jeepImg, tankImg;
+PImage bGImg;
 boolean buildable;
 int lives, money;
-
 
 Grid grid;
 
@@ -29,7 +28,7 @@ void draw()
   
   for(int i = 0 ; i < towers.size() ; i++)
   {
-    towers.get(i).render(towerX, towerY, grid.cellWidth, grid.cellHeight);
+    towers.get(i).render(grid.cellWidth, grid.cellHeight);
   }
 }
 
