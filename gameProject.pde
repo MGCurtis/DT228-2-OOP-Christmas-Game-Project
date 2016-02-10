@@ -70,19 +70,24 @@ void draw()
   
   //grid.render();
   mouseCheck();
+  //get centre point of spawning cell
   spawnPoint = getCellCentre(path[0]);
-
+  
+  //for loop to render all towers in the towers array
   for (int i = 0; i < towers.size (); i++)
   {
     towers.get(i).render(grid.cellWidth, grid.cellHeight);
   }
-
+  
+  //for loop to perform actions on all enemies in the enemy array
   for (int i = 0; i < enemies.size (); i++)
   {
     enemies.get(i).render(grid.cellWidth, grid.cellHeight);
     enemies.get(i).update();
     println(getCellCentre(path[1]));
     
+    //all of these are for waypoint actions, telling enemies
+    //which direction to turn at what points, from the path array
     if(enemies.get(i).pos.x == getCellCentre(path[1]).x && 
     enemies.get(i).nextWP == 1)
     {
@@ -167,6 +172,7 @@ void draw()
       enemies.get(i).nextWP ++;
     }
     
+    //at last waypoint enemy is removed and a life is lost
     if(enemies.get(i).pos.x == getCellCentre(path[13]).x &&
     enemies.get(i).nextWP == 13)
     {
@@ -176,6 +182,7 @@ void draw()
     }
   }
 
+  //after every 90 frames, 1.5 secs, add an enemy and add it to the arrays
   if (frameCount % 90 == 0)
   {
     Enemy enemy = new Enemy(spawnPoint, 50);
@@ -184,8 +191,9 @@ void draw()
   }
 }
 
-int cellX, cellY, pCellX, pCellY;
+int cellX, cellY, pCellX, pCellY; //vars for mouse over cell and path cells
 
+//method to check mouse location
 void mouseCheck()
 {
   cellX = (int)(mouseX / grid.cellWidth);

@@ -42,28 +42,28 @@ class Turret extends GameObject
   {
     enemy = searchForEnemy;
   }
-   /*else
+  else
+  {
+    PVector toEnemy = PVector.sub(pos, enemy.pos);
+    float dist = PVector.dist(enemy.pos, pos);
+    theta = atan2(toEnemy.y, toEnemy.x) - HALF_PI;
+    forward.x = sin(theta);
+    forward.y = -cos(theta);
+
+    if (ellapsed > 30)
     {
-      PVector toEnemy = PVector.sub(pos, enemy.pos);
-      float dist = PVector.dist(enemy.pos, pos);
-      theta = atan2(toEnemy.y, toEnemy.x) - HALF_PI;
-      forward.x = sin(theta);
-      forward.y = -cos(theta);
+      Bullet pro = new Bullet(pos.x, pos.y, 1, 2, 5, range,c);
 
-      if (ellapsed > 30)
-      {
-        Projectile pro = new Projectile(pos.x, pos.y, 1, 2, 5, range,c);
+      bullet.pos.add(PVector.mult(forward, 15.0f));
+      bullet.forward = forward;
+      bullet.theta = theta;
+      gameObjects.add(bullet);
+      ellapsed = 0;
+    }
 
-        pro.pos.add(PVector.mult(forward, 15.0f));
-        pro.forward = forward;
-        pro.theta = theta;
-        gameObjects.add(pro);
-        ellapsed = 0;
-      }
-
-      if (dist < range || ((Creep)creep).life <=0)
-      {
-        creep = null;
-      }
-    }*/
+    if (dist < range || ((Creep)creep).life <=0)
+    {
+      creep = null;
+    }
+  }
 }
