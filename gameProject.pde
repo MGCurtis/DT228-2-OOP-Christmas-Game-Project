@@ -1,9 +1,14 @@
 int screen = 0;
 PImage bGImg, jeepImg, tankImg;
+boolean buildable;
+int lives, money;
+
 
 Grid grid;
 
-ArrayList<Turret> Towers = new ArrayList<Turret>;
+ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
+ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+ArrayList<Turret> towers = new ArrayList<Turret>();
 
 void setup()
 {
@@ -11,15 +16,9 @@ void setup()
   bGImg = loadImage("gameBG2.png");
   
   grid = new Grid (10, 10);
-
-  /*for(int i = 1; i < 10; i++)
-  {
-    int hGap = width / 10;
-    int vGap = height / 10;
-    stroke(127);
-    line(hGap*i, height, hGap*i, 0);
-    line(width, vGap*i, 0, vGap*i);
-  }*/
+  
+  lives = 20;
+  money = 150;
 }
 
 void draw()
@@ -27,12 +26,33 @@ void draw()
   background(bGImg);
   grid.render();
   mouseCheck();
+  
+  for(int i = 0 ; i < towers.size() ; i++)
+  {
+    towers.get(i).render(towerX, towerY, grid.cellWidth, grid.cellHeight);
+  }
 }
+
+int cellX, cellY;
 
 void mouseCheck()
 {
-  int x = (int)(mouseX / grid.cellWidth);
-  int y = (int)(mouseY / grid.cellHeight);
-  grid.highlight(x, y);
-  
+  cellX = (int)(mouseX / grid.cellWidth);
+  cellY = (int)(mouseY / grid.cellHeight);
+  grid.highlight(cellX, cellY);
+  buildable = grid.cellCheck(cellX, cellY);
+}
+
+int towerX, towerY;
+
+void mouseClicked()
+{
+  towerX = cellX; 
+  towerY = cellY;
+  if(buildable)
+  {
+    Turret tower = new Turret(towerX, towerY);
+    gameObjects.add(tower);
+    towers.add(tower);
+  }
 }

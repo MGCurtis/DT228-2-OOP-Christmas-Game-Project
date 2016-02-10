@@ -4,7 +4,6 @@ class Grid
   int cols;
   int cellWidth;
   int cellHeight;
-  boolean
   boolean[][] cells;
   
   void cellSet(int row, int col, boolean value)
@@ -15,6 +14,7 @@ class Grid
   boolean cellCheck(int row, int col)
   {
     boolean status = cells[row][col];
+    status = !status;
     return status;
   }
   
@@ -23,11 +23,6 @@ class Grid
     stroke(200, 200, 0);
     noFill();
     rect(row * cellWidth, col * cellHeight, cellWidth, cellHeight);
-  }
-  
-  boolean emptyCell()
-  {
-    if
   }
     
   Grid(int rows, int cols)
