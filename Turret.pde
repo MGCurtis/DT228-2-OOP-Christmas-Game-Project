@@ -65,7 +65,7 @@ class Turret extends GameObject
       delay ++;
       if (delay > 30)
       {
-        Bullet bullet = new Bullet(pos.x, pos.y, 2);
+        Bullet bullet = new Bullet(pos.x, pos.y, range);
         bullet.pos.add(PVector.mult(forward, 15.0f));
         bullet.forward = forward;
         bullet.theta = theta;

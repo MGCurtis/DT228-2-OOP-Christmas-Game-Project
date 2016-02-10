@@ -53,6 +53,7 @@ class Enemy extends GameObject
     //create a circle around the enemy for use in collision
     //the circle is not visible
     noStroke();
+    noFill();
     ellipse(0, 0, radius, radius);
     popMatrix();
   }
@@ -87,7 +88,10 @@ class Enemy extends GameObject
       if (go instanceof Bullet)
       {
         float dist = PVector.dist(go.pos, pos);
-        //if(dist < 
+        if(dist < radius)
+        {
+          gameObjects.remove(i);
+        }
       }
     }
   }

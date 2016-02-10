@@ -64,6 +64,7 @@ void draw()
   background(bGImg); //set background
   //set text size and display lives and money in top left of screen
   textSize(15);
+  fill(#FFFFFF);
   text("Lives: " + lives, 0, height*0.02f);
   text("$: " + money, 0, height*0.05f);
   
@@ -84,7 +85,11 @@ void draw()
   for (int i = 0; i < gameObjects.size(); i++)
  {
    if(gameObjects.get(i) instanceof Bullet)
+   {
    ((Bullet)gameObjects.get(i)).render();
+   ((Bullet)gameObjects.get(i)).update();
+   }
+
  } 
   
   //for loop to perform actions on all enemies in the enemy array

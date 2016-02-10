@@ -2,20 +2,23 @@ class Bullet extends GameObject
 {
   int radius;
   float speed;
-  //float range;
-  PVector origin;
+  float range;
+  int timer;
   
   Bullet(float x, float y, int r)
   {
     pos.x = x;
     pos.y = y;
-    radius = r;
+    range = r;
+    radius = 4;
     speed = 1.5f;
   }
   
   void render()
   {
     pushMatrix();
+    stroke(#FF0000);
+    fill(#FF0000);
     translate(pos.x, pos.y);
     rotate(theta);
     ellipse(0, 0, radius, radius);
@@ -28,8 +31,8 @@ class Bullet extends GameObject
     forward.y = -cos(theta);
     pos.add(PVector.mult(forward, speed));
     
-    float distance = PVector.dist(pos, origin);
-    if (distance > range/2)
+    timer ++;
+    if(timer == 90)
     {
       gameObjects.remove(this);
     }
